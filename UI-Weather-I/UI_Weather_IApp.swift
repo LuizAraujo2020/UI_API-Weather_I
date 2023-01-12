@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct UI_Weather_IApp: App {
+    @StateObject var mainViewModel = MainViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            //            ContentView()
+            MainView(weather: mainViewModel.weather)
+                .onAppear {
+                    mainViewModel.fetch()
+                }
         }
     }
 }
