@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ImageWithTemperatureView: View {
+struct UpperMainView: View {
     let temperature: Double
     
     var body: some View {
@@ -21,6 +21,6 @@ struct ImageWithTemperatureView: View {
 
 struct ImageWithTemperatureView_Previews: PreviewProvider {
     static var previews: some View {
-        ImageWithTemperatureView(temperature: 2.0)
+        UpperMainView(temperature: 2.0)
     }
 }

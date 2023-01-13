@@ -14,7 +14,7 @@ struct UI_Weather_IApp: App {
     var body: some Scene {
         WindowGroup {
             //            ContentView()
-            MainView(weather: mainViewModel.weather)
+            MainView(viewModel: mainViewModel)
                 .onAppear {
                     mainViewModel.fetch()
                 }

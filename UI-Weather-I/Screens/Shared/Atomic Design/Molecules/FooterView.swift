@@ -11,7 +11,7 @@ struct FooterView: View {
     let text: LocalizedStringKey
     
     var body: some View {
-        ComponentTextView(type: .secondaryTitle, text: text, color: .secondaryText)
+        ReusableText(type: .secondaryTitle, text: text, color: .secondaryText)
     }
 }
 

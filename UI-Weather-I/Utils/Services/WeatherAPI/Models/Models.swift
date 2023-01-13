@@ -34,7 +34,9 @@ struct Weather: Codable, Equatable {
     let stations: [String: Station]
     let currentConditions: CurrentConditions
     
-    var wrapper = Wrapper()
+//    var wrapper = Wrapper()
+//    var wrapperHeader = WrapperHeader()
+    static let empty = Weather.init(queryCost: 0, latitude: 0, longitude: 0, resolvedAddress: "", address: "", timezone: "", tzoffset: 0, description: "", days: [], alerts: [], stations: [:], currentConditions: CurrentConditions.init(datetime: "", datetimeEpoch: 0.0, temp: 0.0, feelslike: 0.0, humidity: 0.0, dew: 0.0, precip: 0.0, precipprob: 0.0, snow: 0, snowdepth: 0, preciptype: [], windgust: 0.0, windspeed: 0.0, winddir: 0.0, pressure: 0.0, visibility: 0.0, cloudcover: 0.0, solarradiation: 0.0, solarenergy: 0.0, uvindex: 0, conditions: Conditions.clear, icon: .clearDay, stations: [], source: .comb, sunrise: "", sunriseEpoch: 0, sunset: "", sunsetEpoch: 0, moonphase: 0.0, tempmax: 0.0, tempmin: 0.0, feelslikemax: 0.0, feelslikemin: 0.0, precipcover: 0.0, severerisk: 0, description: "", hours: []))
 
     enum CodingKeys: String, CodingKey {
         case queryCost = "queryCost"
@@ -58,32 +60,40 @@ struct Weather: Codable, Equatable {
     }
 }
 
-extension Weather {
-    struct Wrapper {
-        
-        var address: String     = ""
-        var description: String = ""
-        var datetime: String    = ""
-        var temperature: Double = 0.1
-        var conditions: String  = ""
-        var date: Date          = .now
-    }
-    
-    mutating func reloadWrapper() {
-        
-        self.wrapper.address     = self.address
-        self.wrapper.description = self.description
-        self.wrapper.datetime    = self.currentConditions.datetime
-        self.wrapper.temperature = self.currentConditions.temp
-        self.wrapper.conditions  = self.currentConditions.conditions?.rawValue ?? "Clear"
-        self.wrapper.date        = NSDate(timeIntervalSince1970: TimeInterval(self.days[0].datetimeEpoch)) as Date
-    }
-//    Text(weather?.address ?? "🚨 Deu ruim")
-//    Text(weather?.description ?? "🚨 Deu ruim 2")
-//    Text(weather?.currentConditions.datetime ?? "🚨 Deu ruim 3")
-//    Text("\(weather?.currentConditions.temp ?? 0.1)")
-//    Text(weather?.currentConditions.conditions?.rawValue ?? "BOm")
-}
+//extension Weather {
+//
+//    struct WrapperHeader {
+//
+//        var address: String     = ""
+//        var description: String = ""
+//        var datetime: String    = ""
+//        var conditions: String  = ""
+//        var date: Date          = .now
+//    }
+//
+//    struct Wrapper {
+//
+//        var temperature: Double = 0.1
+//        var date: Date          = .now
+//    }
+//
+//    mutating func reloadWrapper() {
+//
+//        self.wrapper.date              = NSDate(timeIntervalSince1970: TimeInterval(self.days[0].datetimeEpoch)) as Date
+//        self.wrapper.temperature       = self.currentConditions.temp
+//
+//        self.wrapperHeader.address     = self.address
+//        self.wrapperHeader.conditions  = self.currentConditions.conditions?.rawValue ?? "Clear"
+//        self.wrapperHeader.datetime    = self.currentConditions.datetime
+//        self.wrapperHeader.description = self.description
+//        self.wrapper.date              = NSDate(timeIntervalSince1970: TimeInterval(self.days[0].datetimeEpoch)) as Date
+//    }
+////    Text(weather?.address ?? "🚨 Deu ruim")
+////    Text(weather?.description ?? "🚨 Deu ruim 2")
+////    Text(weather?.currentConditions.datetime ?? "🚨 Deu ruim 3")
+////    Text("\(weather?.currentConditions.temp ?? 0.1)")
+////    Text(weather?.currentConditions.conditions?.rawValue ?? "BOm")
+//}
 
 // CurrentConditions.swift
 
@@ -102,7 +112,7 @@ import Foundation
 // MARK: - CurrentConditions
 struct CurrentConditions: Codable, Equatable {
     let datetime: String
-    let datetimeEpoch: Int
+    let datetimeEpoch: Double
     let temp: Double
     let feelslike: Double
     let humidity: Double
