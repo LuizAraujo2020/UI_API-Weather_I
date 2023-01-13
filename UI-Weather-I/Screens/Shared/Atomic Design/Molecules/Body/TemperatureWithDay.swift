@@ -14,25 +14,25 @@ struct TemperatureWithDay: View {
     var body: some View {
         
         VStack {
-            ComponentTextView(type: .body, text: "Today", color: .secondary)
+            ReusableText(type: .body, text: "Today", color: .secondary)
             
-            HStack {
-                IndicatorView(isRight: false, action: { })
-                
-                Spacer()
+//            HStack {
+//                IndicatorView(isRight: false, action: { })
+//
+//                Spacer()
                 
                 VStack {
                     
-                    ComponentTextView(type: .secondaryTitle, text: dayOfWeek, color: .secondaryText)
+                    ReusableText(type: .secondaryTitle, text: dayOfWeek, color: .secondaryText)
                     
-                    ComponentTextView(type: .mainTitle, text: day)
+                    ReusableText(type: .mainTitle, text: day)
                 }
                 
-                Spacer()
-                
-                IndicatorView(isRight: true, action: { })
-                
-            }
+//                Spacer()
+//
+//                IndicatorView(isRight: true, action: { })
+//
+//            }
         }
     }
 }

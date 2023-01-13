@@ -10,16 +10,16 @@ import SwiftUI
 struct TextFactory: View {
     var body: some View {
         VStack {
-            ComponentTextView(type: .mainTitle,
+            ReusableText(type: .mainTitle,
                               text: "Paralelepipedo",
                               color: .mainRainning)
-            ComponentTextView(type: .secondaryTitle,
+            ReusableText(type: .secondaryTitle,
                               text: "Paralelepipedo",
                               color: .secondaryText)
-//            ComponentTextView(type: .tertiaryTitle,
+//            ReusableText(type: .tertiaryTitle,
 //                              text: "Paralelepipedo",
 //                              color: .secondaryText)
-            ComponentTextView(type: .body,
+            ReusableText(type: .body,
                               text: "Paralelepipedo",
                               color: .secondaryText)
         }
@@ -32,7 +32,7 @@ struct TextFactory_Previews: PreviewProvider {
     }
 }
 
-struct ComponentTextView: View {
+struct ReusableText: View {
     
     enum ComponentTextType: CaseIterable {
         case mainTitle, secondaryTitle/*, tertiaryTitle*/, body
@@ -46,17 +46,19 @@ struct ComponentTextView: View {
     let type: ComponentTextType
     let fontName: String
     let alignment: TextAlignment
+    let lineLimit: Int
     
     /// Creates the Text Component.
     /// - Parameters:
     ///   - type: which type of Text, based on the Design System
     ///   - text: the text to be displayed.
     ///   - accessibilityLabel: label to be used in the accessibility framework
-    init(type: ComponentTextType, text: LocalizedStringKey, accessibilityLabel: LocalizedStringKey? = nil, color: Color? = nil, alignment: TextAlignment = .leading, fontName: String = "") {
+    init(type: ComponentTextType, text: LocalizedStringKey, accessibilityLabel: LocalizedStringKey? = nil, color: Color? = nil, alignment: TextAlignment = .leading, fontName: String = "", lineLimit: Int = 1) {
         self.type      = type
         self.text      = text
         self.fontName  = fontName
         self.alignment = alignment
+        self.lineLimit = lineLimit
         
         if let accessibilityLabel {
             self.accessibilityLabel = accessibilityLabel
@@ -87,6 +89,7 @@ struct ComponentTextView: View {
             }
         }
         .multilineTextAlignment(alignment)
+        .lineLimit(lineLimit)
         .accessibilityLabel(accessibilityLabel)
     }
     

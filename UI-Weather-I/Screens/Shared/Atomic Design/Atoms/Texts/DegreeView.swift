@@ -24,10 +24,10 @@ struct DegreeView: View {
                 .padding()
                 .foregroundColor(.white)
             //
-            //            ComponentTextView(type: .buttonLabel, text: "\(degree)º")
+            //            ReusableText(type: .buttonLabel, text: "\(degree)º")
             //        }
             
-            ComponentTextView(type: .body, text: "\(degree, specifier: "%.1f")º")
+            ReusableText(type: .body, text: "\(degree, specifier: "%.1f")º")
                 .foregroundColor(.mainRainning)
         }
     }
