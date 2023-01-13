@@ -6,22 +6,86 @@
 //
 
 import XCTest
+@testable import UI_Weather_I
 
 final class ServiceAPITests: XCTestCase {
-
+    var sut: APIService!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        sut = APIService()
     }
-
+    
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    
+    func testRequest_Successfully() async throws {
+        // GIVEN
+        var result: Weather?
+        
+        do {
+            result = try await sut.loadData()
+        } catch {
+            XCTFail("Test shouldn't return any error.")
+        }
+        XCTAssertNotNil(result, "The request shouldn't return nil.")
+        XCTAssertEqual(result?.queryCost, 1, "The request should return a queryCost = 1")
+    }
+    
+    func testRequestWithError_WrongName() async {
+        // GIVEN
+        var result: Weather?
+        
+        do {
+            result = try await sut.loadData(forResource: "wrongFileName")
+        } catch {
+            guard let loadError = error as? APIService.RequestError else {
+                XCTFail("Thrown the wrong type of error.")
+                return
+            }
+            
+            XCTAssertEqual(loadError, APIService.RequestError.fileNotFound, "The file shouldn't exists.")
+        }
+        
+        XCTAssertNil(result, "The request should return nil.")
+    }
+    
+    func testRequestWithError_WrongExtension() async {
+        
+            // GIVEN
+            var result: Weather?
+            
+            do {
+                result = try await sut.loadData(withExtension: "wrongFileExtension")
+            } catch {
+                guard let loadError = error as? APIService.RequestError else {
+                    XCTFail("Thrown the wrong type of error.")
+                    return
+                }
+                
+                XCTAssertEqual(loadError, APIService.RequestError.fileNotFound, "The file extension should be wrong.")
+            }
+            
+            XCTAssertNil(result, "The request should return nil.")
+    }
+    
+    func testRequestWithError_WrongType() async {
+        
+        // GIVEN
+        var result: Data?
+        
+        do {
+            result = try await sut.loadData()
+        } catch {
+            guard let loadError = error as? APIService.RequestError else {
+                XCTFail("Thrown the wrong type of error.")
+                return
+            }
+            
+            XCTAssertEqual(loadError, APIService.RequestError.failedToDecode, "The error type should be Failed to decode.")
+        }
+        
+        XCTAssertNil(result, "The request should return nil.")
     }
 }
