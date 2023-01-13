@@ -17,25 +17,27 @@ struct DataCardView: View {
             VStack {
                 Image(systemName: symbol)
                     .font(.title)
-//                    .symbolRenderingMode(.multicolor)
                     .foregroundColor(.secondaryText)
                     .symbolVariant(.fill)
                 
                 ReusableText(type: .secondaryTitle, text: text)
                 
-                
                 ReusableText(type: .body, text: title, color: .secondaryText)
             }
             .padding()
-//            .background(Material.ultraThick)
             .background(Material.ultraThin)
             .clipShape(RoundedRectangle(cornerRadius: .cornerRadius1))
             .frame(minWidth: .screenWidth * 0.2, minHeight: .screenWidth * 0.3)
-            .shadow(radius: .shadowRadius)
+//            .shadow(radius: .shadowRadius)
+            .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.accentColor, lineWidth: 4)
+                )
+        
     }
 }
 
-struct HeadSecondaryView: View {
+struct UpperSecondaryView: View {
     let data: DataCard
 
 //    let gridItems = Array(repeating: GridItem(.flexible(minimum: .screenWidth * 0.2,
@@ -70,6 +72,6 @@ struct DataCardView_Previews: PreviewProvider {
             
             DataCardView(title: "Temperature", text: "90.0", symbol: "thermometer.medium")
         }
-//        HeadSecondaryView(data: .init(weather: .empty))
+//        UpperSecondaryView(data: .init(weather: .empty))
     }
 }

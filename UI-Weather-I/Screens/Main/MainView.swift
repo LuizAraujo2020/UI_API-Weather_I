@@ -16,11 +16,11 @@ struct MainView: View {
 //                .background(.yellow)
             //                .ignoresSafeArea()
             
-            HeadView(dataCard: .init(weather: viewModel.weather ?? .empty))
+            UpperBodyView(dataCard: .init(weather: viewModel.weather ?? .empty))
             
             Spacer()
             
-            TemperatureWithDay(dayOfWeek: LocalizedStringKey(viewModel.getDayOfWeek()),
+            LowerBodyView(dayOfWeek: LocalizedStringKey(viewModel.getDayOfWeek()),
                                day: LocalizedStringKey(viewModel.getDateFromDatetimeEpoch(viewModel.weather?.days[0].datetimeEpoch ?? 01).get(.day)))
             .padding(.horizontal)
 //            .background(.red)

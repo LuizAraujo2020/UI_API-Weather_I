@@ -1,5 +1,5 @@
 //
-//  TemperatureWithDay.swift
+//  LowerBodyView.swift
 //  UI-Weather-I
 //
 //  Created by Luiz Araujo on 11/01/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TemperatureWithDay: View {
+struct LowerBodyView: View {
     let dayOfWeek: LocalizedStringKey
     let day: LocalizedStringKey
     
@@ -39,6 +39,6 @@ struct TemperatureWithDay: View {
 
 struct TemperatureWithDay_Previews: PreviewProvider {
     static var previews: some View {
-        TemperatureWithDay(dayOfWeek: "Tuesday", day: "25")
+        LowerBodyView(dayOfWeek: "Tuesday", day: "25")
     }
 }

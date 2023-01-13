@@ -23,8 +23,8 @@ struct HeaderView: View {
                     .frame(width: widthOfContent)
                     .offset(x: isMain ? 0 : -widthOfContent)
                 
-                HeaderConditionView(address: data.address, description: data.description)
-                    .tag(TypeOfHeader.condition)
+                HeaderSecondaryView(address: data.address, description: data.description)
+                    .tag(TypeOfHeader.secondary)
                     .frame(width: widthOfContent)
                     .offset(x: isMain ? widthOfContent : 0)
             }
@@ -50,7 +50,7 @@ struct HeaderView: View {
                             swipeRight()
                         }
                         
-                        if value.translation.width == 0 {    /// tap
+                        if value.translation.width == 0 {   /// tap
                             isMain.toggle()
                         }
                     }))
@@ -78,17 +78,16 @@ extension HeaderView {
     
     enum TypeOfHeader: Int, CaseIterable, Identifiable {
         case main
-        case condition
+        case secondary
         
         var id: UUID { UUID() }
-        
     }
     
     struct HeaderData {
         
+        let address: LocalizedStringKey
         let condition: LocalizedStringKey
         let dateLocal: LocalizedStringKey
-        let address: LocalizedStringKey
         let description: LocalizedStringKey
         
         init(weather: Weather) {

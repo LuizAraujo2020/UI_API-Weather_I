@@ -1,5 +1,5 @@
 //
-//  HeadView.swift
+//  UpperBodyView.swift
 //  UI-Weather-I
 //
 //  Created by Luiz Araujo on 12/01/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HeadView: View {
+struct UpperBodyView: View {
     @State var isMain = true
     
     let dataCard: DataCard
@@ -17,14 +17,14 @@ struct HeadView: View {
     var body: some View {
         ZStack {
             ZStack {
-                HeadMainView(temperature: dataCard.temp)
+                UpperMainView(temperature: dataCard.temp)
 //                    .tag(TypeOfHeader.main)
                     .frame(width: widthOfContent)
                     .offset(x: isMain ? 0 : -widthOfContent)
                 //            .background(.blue)
                 
-                HeadSecondaryView(data: dataCard)
-//                    .tag(TypeOfHeader.condition)
+                UpperSecondaryView(data: dataCard)
+//                    .tag(TypeOfHeader.secondary)
                     .frame(width: widthOfContent)
                     .offset(x: isMain ? widthOfContent : 0)
             }
@@ -59,7 +59,7 @@ struct HeadView: View {
     }
 }
 
-extension HeadView {
+extension UpperBodyView {
     
     enum TypeOfHeader: Int, CaseIterable, Identifiable {
         case main
@@ -87,7 +87,7 @@ extension HeadView {
 
 
 
-//extension HeadSecondaryView {
+//extension UpperSecondaryView {
     struct DataCard {
         var temp: Double           //= 68.5
         var feelslike: Double      //= 68.5
@@ -118,6 +118,6 @@ extension HeadView {
 
 struct HeadView_Previews: PreviewProvider {
     static var previews: some View {
-        HeadView(dataCard: DataCard.init(weather: .empty))
+        UpperBodyView(dataCard: DataCard.init(weather: .empty))
     }
 }

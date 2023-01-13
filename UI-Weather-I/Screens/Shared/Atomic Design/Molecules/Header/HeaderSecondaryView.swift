@@ -1,5 +1,5 @@
 //
-//  HeaderConditionView.swift
+//  HeaderSecondaryView.swift
 //  UI-Weather-I
 //
 //  Created by Luiz Araujo on 12/01/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HeaderConditionView: View {
+struct HeaderSecondaryView: View {
     let address: LocalizedStringKey
     let description: LocalizedStringKey
     
@@ -29,7 +29,7 @@ struct HeaderConditionView: View {
 
 struct HeaderConditionView_Previews: PreviewProvider {
     static var previews: some View {
-        HeaderConditionView(address: "Brasília", description: "Similar temperatures continuing with a chance of rain multiple days.")
+        HeaderSecondaryView(address: "Brasília", description: "Similar temperatures continuing with a chance of rain multiple days.")
             .previewLayout(.sizeThatFits)
     }
 }
