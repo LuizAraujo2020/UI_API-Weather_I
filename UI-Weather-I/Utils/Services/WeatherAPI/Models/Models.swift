@@ -1,21 +1,3 @@
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse the JSON, add this file to your project and do:
-//
-//   let weather = try? JSONDecoder().decode(Weather.self, from: jsonData)
-
-import Foundation
-// Weather.swift
-
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse the JSON, add this file to your project and do:
-//
-//   let weather = try? newJSONDecoder().decode(Weather.self, from: jsonData)
-//
-// Hashable or Equatable:
-// The compiler will not be able to synthesize the implementation of Hashable or Equatable
-// for types that require the use of JSONAny, nor will the implementation of Hashable be
-// synthesized for types that have collections (such as arrays or dictionaries).
-
 import Foundation
 
 // MARK: - Weather
@@ -59,53 +41,6 @@ struct Weather: Codable, Equatable {
         lhs.address == rhs.address
     }
 }
-
-//extension Weather {
-//
-//    struct WrapperHeader {
-//
-//        var address: String     = ""
-//        var description: String = ""
-//        var datetime: String    = ""
-//        var conditions: String  = ""
-//        var date: Date          = .now
-//    }
-//
-//    struct Wrapper {
-//
-//        var temperature: Double = 0.1
-//        var date: Date          = .now
-//    }
-//
-//    mutating func reloadWrapper() {
-//
-//        self.wrapper.date              = NSDate(timeIntervalSince1970: TimeInterval(self.days[0].datetimeEpoch)) as Date
-//        self.wrapper.temperature       = self.currentConditions.temp
-//
-//        self.wrapperHeader.address     = self.address
-//        self.wrapperHeader.conditions  = self.currentConditions.conditions?.rawValue ?? "Clear"
-//        self.wrapperHeader.datetime    = self.currentConditions.datetime
-//        self.wrapperHeader.description = self.description
-//        self.wrapper.date              = NSDate(timeIntervalSince1970: TimeInterval(self.days[0].datetimeEpoch)) as Date
-//    }
-////    Text(weather?.address ?? "🚨 Deu ruim")
-////    Text(weather?.description ?? "🚨 Deu ruim 2")
-////    Text(weather?.currentConditions.datetime ?? "🚨 Deu ruim 3")
-////    Text("\(weather?.currentConditions.temp ?? 0.1)")
-////    Text(weather?.currentConditions.conditions?.rawValue ?? "BOm")
-//}
-
-// CurrentConditions.swift
-
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse the JSON, add this file to your project and do:
-//
-//   let currentConditions = try? newJSONDecoder().decode(CurrentConditions.self, from: jsonData)
-//
-// Hashable or Equatable:
-// The compiler will not be able to synthesize the implementation of Hashable or Equatable
-// for types that require the use of JSONAny, nor will the implementation of Hashable be
-// synthesized for types that have collections (such as arrays or dictionaries).
 
 import Foundation
 
