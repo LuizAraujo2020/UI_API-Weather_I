@@ -11,16 +11,8 @@ struct ContentView: View {
     @ObservedObject var viewModel: MainViewModel
     
     var body: some View {
-        MainView(viewModel: viewModel)        
+        MainView(viewModel: viewModel)
         .onAppear {
-            
-//            Task {
-//                do {
-//                    weather = try await service.loadData()
-//                } catch {
-//                    //TODO: ☑️ FAZER DEPOIS
-//                }
-//            }
             viewModel.fetch()
         }
     }

@@ -29,6 +29,17 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       language = "en">
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6F923DA02971EB8000240043"
+               BuildableName = "UI-Weather-ITests.xctest"
+               BlueprintName = "UI-Weather-ITests"
+               ReferencedContainer = "container:UI-Weather-I.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

@@ -18,6 +18,8 @@ struct UI_Weather_IApp: App {
                 .onAppear {
                     mainViewModel.fetch()
                 }
+            
+//            Mapview()
         }
     }
 }
