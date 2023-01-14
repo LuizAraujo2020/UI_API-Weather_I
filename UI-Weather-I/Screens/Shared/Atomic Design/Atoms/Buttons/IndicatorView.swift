@@ -14,6 +14,7 @@ struct IndicatorView: View {
     var body: some View {
         Button {
             action()
+            
         } label: {
             Image(systemName: isRight ? "chevron.right" : "chevron.left")
                 .font(.title2.bold())

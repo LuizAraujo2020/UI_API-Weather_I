@@ -28,6 +28,7 @@ struct APIService {
         
         guard let response = response as? HTTPURLResponse,
               response.statusCode == 200 else {
+            
             throw RequestError.invalidRequest
         }
         
@@ -40,10 +41,10 @@ struct APIService {
         
         guard let url = Bundle.main.url(forResource: forResource, withExtension: withExtension) else {
             print("Json file not found")
-            throw RequestError.fileNotFound
             
+            throw RequestError.fileNotFound
         }
-                
+        
         do {
             let data = try Data(contentsOf: url)
             let decodedData = try JSONDecoder().decode(T.self, from: data)

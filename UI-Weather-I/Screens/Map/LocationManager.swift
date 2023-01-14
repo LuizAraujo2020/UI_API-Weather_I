@@ -8,8 +8,8 @@
 import CoreLocation
 import CoreLocationUI
 
-class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    let manager = CLLocationManager()
+class LocationManager: NSObject, LocationManagerProtocol {
+    var manager = CLLocationManager()
 
     /// Able to request the user’s location on demand.
     @Published var location: CLLocationCoordinate2D?

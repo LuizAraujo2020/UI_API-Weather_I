@@ -27,7 +27,6 @@ final class MainViewModel: ObservableObject {
                 //TODO: ☑️ FAZER DEPOIS
             }
         }
-        
     }
 
     func getDayOfWeek() -> String {
@@ -35,7 +34,7 @@ final class MainViewModel: ObservableObject {
         let dateEpoch: Date = getDateFromDatetimeEpoch(weather?.days[0].datetimeEpoch ?? 1673487952.0)
         
         let f = DateFormatter()
-
+        
         return f.weekdaySymbols[dateEpoch.get(.weekday) - 1]
     }
     
@@ -53,30 +52,6 @@ final class MainViewModel: ObservableObject {
         let dateEpoch: Date = getDateFromDatetimeEpoch(weather?.days[0].datetimeEpoch ?? 1673487952.0)
 
         return "\(dateEpoch.get(.year))"
-    }
-    
-    func getDateFromDatetimeEpoch(_ epoch: Double) -> Date {
-        NSDate(timeIntervalSince1970: TimeInterval(epoch)) as Date
-    }
-    
-}
-
-
-extension Date {
-    func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
-        return calendar.dateComponents(Set(components), from: self)
-    }
-    
-    func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
-        return calendar.component(component, from: self)
-    }
-    
-    func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> String {
-        return String(calendar.component(component, from: self))
-    }
-    
-    func getDateFromDatetimeEpoch(_ epoch: Int) -> Date {
-        NSDate(timeIntervalSince1970: TimeInterval(epoch)) as Date
     }
     
     func getDateFromDatetimeEpoch(_ epoch: Double) -> Date {

@@ -13,13 +13,13 @@ struct UI_Weather_IApp: App {
     
     var body: some Scene {
         WindowGroup {
-            //            ContentView()
-            MainView(viewModel: mainViewModel)
-                .onAppear {
-                    mainViewModel.fetch()
-                }
+//            //            ContentView()
+//            MainView(viewModel: mainViewModel)
+//                .onAppear {
+//                    mainViewModel.fetch()
+//                }
             
-//            Mapview()
+            Mapview()
         }
     }
 }
