@@ -11,10 +11,10 @@ import CoreLocationUI
 @testable import UI_Weather_I
 
 final class LocationManagerTests: XCTestCase {
-    var sut: LocationManager!
+    var sut: (any LocationManagerProtocol)!
 
     override func setUpWithError() throws {
-        sut = LocationManager()
+        sut = MockLocationManager()
     }
 
     override func tearDownWithError() throws {
@@ -31,27 +31,8 @@ final class LocationManagerTests: XCTestCase {
         sut.requestLocation()
         
         /// Then
-        
-        
-        let exp = expectation(description: "Test after 5 seconds")
-        let result = XCTWaiter.wait(for: [exp], timeout: 5.0)
-        
-//        // THEN
-//        if result == XCTWaiter.Result.timedOut {
-//            XCTAssertNotNil(sut.location, "After the request, the `location` shouldn't be nil.")
-//        } else {
-//            XCTFail("Delay interrupted")
-//        }
-        
-        
-        
-        
-//        XCTAssertEqual(sut.location!.latitude, CLLocationDegrees(14.231213))
-//
-//        XCTAssertEqual(sut.location!.longitude, CLLocationDegrees(14.231213))
-    }
-    
-    func test() {
-        
+        XCTAssertNotNil(sut.location, "After the request, the `location` shouldn't be nil.")
+        XCTAssertEqual(sut.location!.latitude, CLLocationDegrees(37.3317), "After the request, the `location.latitude` should be 37.3317.")
+        XCTAssertEqual(sut.location!.longitude, CLLocationDegrees(-122.0325086), "After the request, the `location.longitude` should be -122.0325086.")
     }
 }

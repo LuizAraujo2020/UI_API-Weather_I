@@ -9,7 +9,11 @@ import SwiftUI
 
 @MainActor
 final class MainViewModel: ObservableObject {
-    @Published var weather: Weather!
+    
+    @Published private(set) var weather: Weather!
+    
+    @Published var message: Message?
+    @Published var showMessage: Bool = false
     
     init() {
         fetch()
@@ -18,17 +22,34 @@ final class MainViewModel: ObservableObject {
     func fetch() {
         Task {
             do {
-//#if DEBUG
                 let service = APIService()
                 
                 weather = try await service.loadData()
-//#endif
+                
             } catch {
-                //TODO: ☑️ FAZER DEPOIS
+                presentMessage(error as! ErrorType)
             }
         }
     }
+}
 
+// MARK: - Message
+extension MainViewModel {
+    
+    func presentMessage(_ error: ErrorType) {
+        message     = Message(error: error)
+        showMessage = true
+    }
+    
+    func dismissMessage() {
+        message     = nil
+        showMessage = false
+    }
+}
+
+// MARK: - Dates
+extension MainViewModel {
+    
     func getDayOfWeek() -> String {
         
         let dateEpoch: Date = getDateFromDatetimeEpoch(weather?.days[0].datetimeEpoch ?? 1673487952.0)

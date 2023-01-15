@@ -8,18 +8,6 @@
 import UIKit
 
 struct APIService {
-    // MARK: - Errors
-    enum RequestError: Error, Equatable {
-        
-        case invalidRequest
-        case failedToDecode
-        case fileNotFound
-        case custom(error: Error)
-        
-        static func == (lhs: APIService.RequestError, rhs: APIService.RequestError) -> Bool {
-            lhs.localizedDescription == rhs.localizedDescription
-        }
-    }
     
     func fetch<T: Codable>(_ url: URL = urlExample,
                            type: T.Type) async throws -> T {
@@ -28,13 +16,23 @@ struct APIService {
         
         guard let response = response as? HTTPURLResponse,
               response.statusCode == 200 else {
+            let resp = response as? HTTPURLResponse
+            if resp!.statusCode < 500{
+                throw ErrorType.invalidRequest
+            }
             
-            throw RequestError.invalidRequest
+            throw ErrorType.serverProblem
         }
         
-        let decodedData = try JSONDecoder().decode(T.self, from: data)
         
-        return decodedData
+        do {
+            let decodedData = try JSONDecoder().decode(T.self, from: data)
+            
+            return decodedData
+            
+        } catch {
+            throw ErrorType.failedToDecode
+        }
     }
     
     func loadData<T: Codable>(forResource: String = "MockJson", withExtension: String = "json")  async throws -> T {
@@ -42,7 +40,7 @@ struct APIService {
         guard let url = Bundle.main.url(forResource: forResource, withExtension: withExtension) else {
             print("Json file not found")
             
-            throw RequestError.fileNotFound
+            throw ErrorType.fileNotFound
         }
         
         do {
@@ -52,7 +50,7 @@ struct APIService {
             return decodedData
             
         } catch {
-            throw RequestError.failedToDecode
+            throw ErrorType.failedToDecode
         }
     }
 }

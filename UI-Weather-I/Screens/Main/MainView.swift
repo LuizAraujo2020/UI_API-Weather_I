@@ -11,34 +11,39 @@ struct MainView: View {
     @ObservedObject var viewModel: MainViewModel
     
     var body: some View {
-        VStack {
-            HeaderView(data: .init(weather: viewModel.weather ?? .empty))
-//                .background(.yellow)
-            //                .ignoresSafeArea()
-            
-            UpperBodyView(dataCard: .init(weather: viewModel.weather ?? .empty))
-            
-            Spacer()
-            
-            LowerBodyView(dayOfWeek: LocalizedStringKey(viewModel.getDayOfWeek()),
-                               day: LocalizedStringKey(viewModel.getDateFromDatetimeEpoch(viewModel.weather?.days[0].datetimeEpoch ?? 01).get(.day)))
-            .padding(.horizontal)
-//            .background(.red)
-            
-            Spacer()
-            
-            Divider()
-            
-            FooterView(text: "\(viewModel.getMonth())/\(viewModel.getYear())")
-        }
-        .background(
+        ZStack {
             BackgroundView()
                 .offset(y: .screenWidth * -0.36)
                 .opacity(0.2)
                 .shadow(radius: .shadowRadius1)
-        )
+                
+            VStack {
+                HeaderView(data: .init(weather: viewModel.weather ?? .empty))
+                
+                UpperBodyView(dataCard: .init(weather: viewModel.weather ?? .empty))
+                
+                Spacer()
+                
+                LowerBodyView(dayOfWeek: LocalizedStringKey(viewModel.getDayOfWeek()),
+                              day: LocalizedStringKey(viewModel.getDateFromDatetimeEpoch(viewModel.weather?.days[0].datetimeEpoch ?? 01).get(.day)))
+                .padding(.horizontal)
+                
+                Spacer()
+                
+                Divider()
+                
+                FooterView(text: "\(viewModel.getMonth())/\(viewModel.getYear())")
+            }
+            
+            if let error = viewModel.message, viewModel.showMessage {
+                ReusableMessageView(message: error) {
+                    viewModel.dismissMessage()
+                }
+            }
+            
+        }
+        .animation(.easeInOut, value: viewModel.showMessage)
     }
-    
 }
 
 struct MainView_Previews: PreviewProvider {
