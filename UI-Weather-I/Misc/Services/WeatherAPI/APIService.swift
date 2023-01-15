@@ -8,38 +8,50 @@
 import UIKit
 
 struct APIService {
-    // MARK: - Errors
-    enum RequestError: Error {
-        case invalidRequest
-        case failedToDecode
-        case fileNotFound
-        case custom(error: Error)
-    }
     
     func fetch<T: Codable>(_ url: URL = urlExample,
                            type: T.Type) async throws -> T {
+        
         let (data, response) = try await URLSession.shared.data(from: url)
         
         guard let response = response as? HTTPURLResponse,
               response.statusCode == 200 else {
-            throw RequestError.invalidRequest
+            let resp = response as? HTTPURLResponse
+            if resp!.statusCode < 500{
+                throw ErrorType.invalidRequest
+            }
+            
+            throw ErrorType.serverProblem
         }
         
-        let decodedData = try JSONDecoder().decode(T.self, from: data)
         
-        return decodedData
+        do {
+            let decodedData = try JSONDecoder().decode(T.self, from: data)
+            
+            return decodedData
+            
+        } catch {
+            throw ErrorType.failedToDecode
+        }
     }
     
     func loadData<T: Codable>(forResource: String = "MockJson", withExtension: String = "json")  async throws -> T {
+        
         guard let url = Bundle.main.url(forResource: forResource, withExtension: withExtension) else {
             print("Json file not found")
-            throw RequestError.fileNotFound
+            
+            throw ErrorType.fileNotFound
         }
         
-        let data = try? Data(contentsOf: url)
-        let decodedData = try? JSONDecoder().decode(T.self, from: data!)
-        return decodedData!
-        
+        do {
+            let data = try Data(contentsOf: url)
+            let decodedData = try JSONDecoder().decode(T.self, from: data)
+            
+            return decodedData
+            
+        } catch {
+            throw ErrorType.failedToDecode
+        }
     }
 }
 

@@ -9,7 +9,11 @@ import SwiftUI
 
 @MainActor
 final class MainViewModel: ObservableObject {
-    @Published var weather: Weather!
+    
+    @Published private(set) var weather: Weather!
+    
+    @Published var message: Message?
+    @Published var showMessage: Bool = false
     
     init() {
         fetch()
@@ -18,24 +22,40 @@ final class MainViewModel: ObservableObject {
     func fetch() {
         Task {
             do {
-//#if DEBUG
                 let service = APIService()
                 
                 weather = try await service.loadData()
-//#endif
+                
             } catch {
-                //TODO: ☑️ FAZER DEPOIS
+                presentMessage(error as! ErrorType)
             }
         }
-        
     }
+}
 
+// MARK: - Message
+extension MainViewModel {
+    
+    func presentMessage(_ error: ErrorType) {
+        message     = Message(error: error)
+        showMessage = true
+    }
+    
+    func dismissMessage() {
+        message     = nil
+        showMessage = false
+    }
+}
+
+// MARK: - Dates
+extension MainViewModel {
+    
     func getDayOfWeek() -> String {
         
         let dateEpoch: Date = getDateFromDatetimeEpoch(weather?.days[0].datetimeEpoch ?? 1673487952.0)
         
         let f = DateFormatter()
-
+        
         return f.weekdaySymbols[dateEpoch.get(.weekday) - 1]
     }
     
@@ -53,30 +73,6 @@ final class MainViewModel: ObservableObject {
         let dateEpoch: Date = getDateFromDatetimeEpoch(weather?.days[0].datetimeEpoch ?? 1673487952.0)
 
         return "\(dateEpoch.get(.year))"
-    }
-    
-    func getDateFromDatetimeEpoch(_ epoch: Double) -> Date {
-        NSDate(timeIntervalSince1970: TimeInterval(epoch)) as Date
-    }
-    
-}
-
-
-extension Date {
-    func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
-        return calendar.dateComponents(Set(components), from: self)
-    }
-    
-    func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
-        return calendar.component(component, from: self)
-    }
-    
-    func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> String {
-        return String(calendar.component(component, from: self))
-    }
-    
-    func getDateFromDatetimeEpoch(_ epoch: Int) -> Date {
-        NSDate(timeIntervalSince1970: TimeInterval(epoch)) as Date
     }
     
     func getDateFromDatetimeEpoch(_ epoch: Double) -> Date {

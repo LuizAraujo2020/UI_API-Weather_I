@@ -8,6 +8,7 @@
 import UIKit
 
 extension CGFloat {
+    static let screenHeight  = UIScreen.main.bounds.size.height
     static let screenWidth   = UIScreen.main.bounds.size.width
     static let btnWidthBig   = CGFloat(screenWidth * 0.865385)
     static let btnWidthSmall = CGFloat(screenWidth * 0.396635)

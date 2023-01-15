@@ -7,30 +7,22 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @ObservedObject var viewModel: MainViewModel
-    
-    var body: some View {
-        MainView(viewModel: viewModel)        
-        .onAppear {
-            
-//            Task {
-//                do {
-//                    weather = try await service.loadData()
-//                } catch {
-//                    //TODO: ☑️ FAZER DEPOIS
-//                }
-//            }
-            viewModel.fetch()
-        }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView(viewModel: MainViewModel())
-    }
-}
+//struct ContentView: View {
+//    @ObservedObject var viewModel: MainViewModel
+//
+//    var body: some View {
+//        MainView(viewModel: viewModel)
+//        .onAppear {
+//            viewModel.fetch()
+//        }
+//    }
+//}
+//
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView(viewModel: MainViewModel())
+//    }
+//}
 
 
 /*
