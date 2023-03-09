@@ -66,6 +66,7 @@
 		6F1AE8F529734C890054E122 /* ReusableMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableMessageView.swift; sourceTree = "<group>"; };
 		6F1AE8F7297373810054E122 /* ImageMessageStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMessageStyle.swift; sourceTree = "<group>"; };
 		6F1AE8FA297420600054E122 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		6F1AE8FC29743D540054E122 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6F923DA12971EB8000240043 /* UI-Weather-ITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UI-Weather-ITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F923DAC2971EE2C00240043 /* ServiceAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAPITests.swift; sourceTree = "<group>"; };
 		6F923DAF29721D1200240043 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
@@ -199,6 +200,7 @@
 		6FA3F477296F38790018B706 = {
 			isa = PBXGroup;
 			children = (
+				6F1AE8FC29743D540054E122 /* README.md */,
 				6FA3F482296F38790018B706 /* UI-Weather-I */,
 				6F923DA22971EB8000240043 /* UI-Weather-ITests */,
 				6FA3F481296F38790018B706 /* Products */,
